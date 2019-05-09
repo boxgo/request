@@ -6,6 +6,7 @@ import (
 
 	"github.com/BiteBit/gorequest"
 	"github.com/boxgo/box/minibox"
+	"github.com/boxgo/metrics"
 )
 
 type (
@@ -14,9 +15,10 @@ type (
 		Timeout   int64  `config:"timeout" desc:"Timeout millsecond, default 10s"`
 		UserAgent string `config:"userAgent" desc:"Client User-Agent"`
 		ShowLog   bool   `config:"showLog" desc:"Show request log"`
-		Trace     bool   `config:"trace" desc:"Open prometheus trace"`
+		Metrics   bool   `config:"metrics" desc:"default is false"`
 
-		app minibox.App
+		app     minibox.App
+		metrics metrics.Metrics
 	}
 )
 
@@ -35,7 +37,7 @@ func (opts *Options) Name() string {
 
 // Exts 获取app信息
 func (opts *Options) Exts() []minibox.MiniBox {
-	return []minibox.MiniBox{&opts.app}
+	return []minibox.MiniBox{&opts.app, &opts.metrics}
 }
 
 func (opts *Options) ConfigWillLoad(context.Context) {
@@ -74,8 +76,12 @@ func setup(agent *gorequest.SuperAgent) {
 	}
 
 	agent.Timeout(timeout)
+
 	agent.UseBefore(logBefore)
-	agent.UseAfter(logAfter)
+	agent.UseBefore(metricsBefore)
 	agent.UseBefore(befores...)
+
+	agent.UseAfter(logAfter)
+	agent.UseAfter(metricsAfter)
 	agent.UseAfter(afters...)
 }
