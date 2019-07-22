@@ -12,10 +12,10 @@ import (
 type (
 	// Options http request tool
 	Options struct {
-		Timeout   int64  `config:"timeout" desc:"Timeout millsecond, default 10s"`
-		UserAgent string `config:"userAgent" desc:"Client User-Agent"`
-		ShowLog   bool   `config:"showLog" desc:"Show request log"`
-		Metrics   bool   `config:"metrics" desc:"default is false"`
+		Timeout   int64  `config:"timeout" help:"Timeout millsecond, default 10s"`
+		UserAgent string `config:"userAgent" help:"Client User-Agent"`
+		ShowLog   bool   `config:"showLog" help:"Show request log"`
+		Metrics   bool   `config:"metrics" help:"default is false"`
 
 		app     minibox.App
 		metrics metrics.Metrics
