@@ -1,7 +1,7 @@
 package request
 
 import (
-	"github.com/BiteBit/gorequest"
+	"github.com/amazing-gao/gorequest"
 	"github.com/boxgo/logger"
 )
 

@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/BiteBit/gorequest"
+	"github.com/amazing-gao/gorequest"
 	"github.com/boxgo/box/minibox"
 	"github.com/boxgo/metrics"
 )

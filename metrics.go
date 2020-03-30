@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/BiteBit/gorequest"
+	"github.com/amazing-gao/gorequest"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
